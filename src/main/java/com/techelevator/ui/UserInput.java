@@ -31,8 +31,8 @@ public class UserInput
         {
             return "display";
         }
-        else if (option.equals("P"))
-        {
+        else if (option.equals("P")) {
+
             return "purchase";
         }
         else if (option.equals("E"))
