@@ -8,12 +8,10 @@ import java.util.Scanner;
  * 
  * Dependencies: None
  */
-public class UserInput
-{
+public class UserInput {
     private Scanner scanner = new Scanner(System.in);
 
-    public String getHomeScreenOption()
-    {
+    public String getHomeScreenOption(){
         System.out.println("What would you like to do?");
         System.out.println();
 
