@@ -20,8 +20,14 @@ public class VendingMachine {
     public void run() {
         UserOutput userOutput = new UserOutput();
         UserInput userInput = new UserInput();
+<<<<<<< HEAD
         File stockFile = userInput.setStockFile();
         File auditFile = userInput.setAuditFile();
+=======
+        ///ask user for path
+        this.stockFile = userInput.setStockFile();
+        this.auditFile = userInput.setAuditFile();
+>>>>>>> 8eee546e0bc9df5ff3d2bf4f5b73be768b287243
 
         //Created a list of Item class objects and initializing itemManager with list.
         List<Item> vendingItems = new ArrayList<>();
