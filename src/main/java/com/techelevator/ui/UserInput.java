@@ -74,7 +74,6 @@ public class UserInput {
         String insert = scanner.nextLine();
         double n = Double.parseDouble(insert);
         BigDecimal inserted = new BigDecimal(n);
-        System.out.println(inserted);
         return inserted;
     }
 

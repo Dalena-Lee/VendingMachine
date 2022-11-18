@@ -1,20 +1,15 @@
 package com.techelevator.application;
 
-import com.techelevator.Audit;
-import com.techelevator.Item;
-import com.techelevator.ItemManager;
-import com.techelevator.Purchase;
+import com.techelevator.*;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class VendingMachine {
-    private Purchase purchase;
 
     public VendingMachine() {
     }
@@ -23,40 +18,12 @@ public class VendingMachine {
         UserOutput userOutput = new UserOutput();
         UserInput userInput = new UserInput();
 
-        File stockFile = userInput.setStockFile();
+        Stock stock = new Stock();
+        stock.stockItems();
+        ItemManager itemManager = stock.getItemManager();
+
         File auditFile = userInput.setAuditFile();
-
-        List<String> auditStrings = new ArrayList<>();
-        Audit audit = new Audit(auditStrings);
-        String audits = "";
-
-        //Created a list of Item class objects and initializing itemManager with list.
-        List<Item> vendingItems = new ArrayList<>();
-        ItemManager itemManager = new ItemManager(vendingItems);
-
-        //Created a string to display each line and added it to a list.
-        String displayItems = "";
-        List<String> displayItem = new ArrayList<>();
-
-        try (Scanner fileScanner = new Scanner(stockFile)) {
-            while (fileScanner.hasNextLine()) {
-                String eachLine = fileScanner.nextLine();
-                String[] vending = eachLine.split(",");
-
-                //For each line in the file, the line gets split and a new item object is initialized.
-                Item item = new Item(vending[0], vending[1], vending[2], vending[3]);
-
-                //Appending the new string.
-                displayItems = vending[0] + " " + vending[1] + " " + vending[2];
-                displayItem.add(displayItems);
-
-                //Added item into list of objects.
-                vendingItems.add(item);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        Audit audit = new Audit();
 
         while(true){
             userOutput.displayHomeScreen();
@@ -64,66 +31,76 @@ public class VendingMachine {
 
             if(choice.equals("display")) {
                 // display the vending machine slots
-                for (String s: displayItem){
+                for (String s: stock.getDisplayItem()){
                     System.out.println(s);
                 }
             }
 
-            else if(choice.equals("purchase")) {
-                //purchase = new purchase();
-                String purchaseChoice = userInput.getPurchaseOption();
+            else if (choice.equals("purchase")) {
+                Purchase purchase = new Purchase();
 
-                if (purchaseChoice.equals("insert")){
-                    BigDecimal inserted = userInput.getMoneyProvided();
-                    //set currentbalance to the money provided
-                    purchase.setCurrentBalance(inserted);
+                Innerloop:
+                while(true) {
+                    String purchaseChoice = userInput.getPurchaseOption();
+                    if (purchaseChoice.equals("insert")) {
+                        BigDecimal inserted = userInput.getMoneyProvided();
+                        //set current balance to the money provided
+                        purchase.setCurrentBalance(inserted);
 
-                    //Record to audit.txt
-                    BigDecimal currentBalance = purchase.getCurrentBalance();
-                    String insertMessage = "Money inserted: ";
-                    String currentTime = audit.getCurrentTime();
-                    audits = String.format("%-22d%-22d%-22d%-22d\n",currentTime, insertMessage, inserted, currentBalance);
-                    auditStrings.add(audits);
-                }
+                        //Record to audit.txt
+                        BigDecimal currentBalance = purchase.getCurrentBalance();
+                        String insertMessage = "Money inserted: ";
+                        String currentTime = audit.getCurrentTime();
+                        audit.recordToAudit(currentTime, insertMessage, inserted, currentBalance);
+                    }
 
-                else if (purchaseChoice.equals("select")){
-                    //Prompt user to select an item using the item key.
-                    String selectedItem = userInput.getSelectedItem();
+                    else if (purchaseChoice.equals("select")) {
+                        //Prompt user to select an item using the item key.
+                        String selectedItem = userInput.getSelectedItem();
 
-                    List<String> samePurchasePrice = new ArrayList<>();
-                    //Iterate through the list of Item objects and select the item using input key.
-                    for(Item i: itemManager.getItems()) {
-                        String key = i.getItemKey();
-                        if (key.equals(selectedItem)) {
-                        //update and display currentBalance
-                            BigDecimal currentBalance = purchase.getCurrentBalance();
-                            BigDecimal balanceAfterPurchase = purchase.calculateChange(i.getPurchasePrice());
-                            System.out.println("Your remaining balance: " + purchase.getCurrentBalance());
+                        //Iterate through the list of Item objects and select the item using input key.
+                        for (Item i : itemManager.getItems()) {
+                            String key = i.getItemKey();
+                            if (key.equals(selectedItem)) {
+                                if (itemManager.isInStock(i)) {
+                                    // record to audit
+                                    BigDecimal currentBalance = purchase.getCurrentBalance();
+                                    BigDecimal balanceAfterPurchase = purchase.calculateChange(i.getPurchasePrice());
+                                    String itemAudit = i.getItemName();
+                                    String currentTime = audit.getCurrentTime();
+                                    audit.recordToAudit(currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
 
-                            // record to audit
-                            String itemAudit = i.getItemName();
-                            String currentTime = audit.getCurrentTime();
-                            audits = String.format("%-22d%-22d%-22d%-22d%-22d\n",currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
-                            auditStrings.add(audits);
+                                    //update and display currentBalance
+                                    purchase.countNumberOfItems();
+                                    purchase.setCurrentBalance(balanceAfterPurchase);
+                                    System.out.println("Your remaining balance: " + purchase.getCurrentBalance());
+                                }
+
+                                else {
+                                    System.out.println("Sorry, item is out of stock!");
+                                }
+                            }
                         }
                     }
 
+                    else if (purchaseChoice.equals("finish")) {
+                        BigDecimal currentBalance = purchase.getCurrentBalance();
+                        //Customers receive remaining change
+                        //Change is returned using nickels, dimes, quarters, and single dollars
+                        //Use the smallest amount of coins possible.
+                        //Update balance
 
+                        //Record to audit.txt.
+                        String changeMessage = "CHANGE GIVEN: ";
+                        String currentTime = audit.getCurrentTime();
+                        String emptyBalance = "0.00";
+                        audit.recordToAudit(currentTime, changeMessage, currentBalance, emptyBalance);
+                        break Innerloop;
+                    }
                 }
-                else if (purchaseChoice.equals("finish")){
-                    BigDecimal currentBalance = purchase.getCurrentBalance();
-                    BigDecimal balanceWhenExit = BigDecimal.valueOf(0.00);
-                    String changeMessage = "CHANGE GIVEN: ";
-                    String currentTime = audit.getCurrentTime();
-                    audits = String.format("%-22d%-22d%-22d%-22d\n",currentTime, changeMessage, currentBalance, balanceWhenExit);
-                    auditStrings.add(audits);
-
-                    userOutput.displayHomeScreen();
-                }
-
             }
-
             else if(choice.equals("exit")) {
+                audit.printToFile(auditFile);
                 //good bye
                 break;
             }

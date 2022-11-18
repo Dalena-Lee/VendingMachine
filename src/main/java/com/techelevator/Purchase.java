@@ -10,7 +10,10 @@ import java.time.temporal.TemporalAdjusters;
 public class Purchase {
 
     private BigDecimal purchasePrice;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 826ca219a27d02d8dafdb601e3d1fa825749ce74
     private BigDecimal currentBalance;
 
     private BigDecimal nickels;
@@ -36,11 +39,15 @@ public class Purchase {
         this.currentBalance = currentBalance;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 826ca219a27d02d8dafdb601e3d1fa825749ce74
     public void countNumberOfItems(){
         numberOfItems++;
     }
 
+<<<<<<< HEAD
     public BigDecimal calculateChange(BigDecimal purchasePrice){
         BigDecimal currentBalance -= purchasePrice;
 
@@ -56,8 +63,23 @@ public class Purchase {
 
             currentBalance -= purchasePrice;
 
+=======
+    public BigDecimal calculateChange(BigDecimal purchasePrice) {
+//        //currentBalance -= purchasePrice;
+//        // if bogodo is true, buy one, get second off for a dollar, resets after bogodo price
+//        //increment by 2, i <
+//
+//
+//        if (isBOGODO()) {
+//            for (int i = 0; i<numberOfItems; i += 2){
+//                purchasePrice = purchasePrice - 1;
+//            }
+//        } else {
+//            currentBalance -= purchasePrice;
+            return currentBalance;
+>>>>>>> 826ca219a27d02d8dafdb601e3d1fa825749ce74
         }
-    }
+//    }
 
     public boolean isBOGODO(){
      // get date of first nov of current year
@@ -91,4 +113,10 @@ public class Purchase {
         }
     }
 
+<<<<<<< HEAD
+=======
+    //getCurrentBalance(); //purchasePrice, selectedItem,
+    //boolean isThanksgiving; get local date and time
+    int purchasesUntilBOGODO;
+>>>>>>> 826ca219a27d02d8dafdb601e3d1fa825749ce74
 }
