@@ -1,5 +1,8 @@
 package com.techelevator.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -11,7 +14,7 @@ import java.util.Scanner;
 public class UserInput {
     private Scanner scanner = new Scanner(System.in);
 
-    public String getHomeScreenOption(){
+    public String getHomeScreenOption() {
         System.out.println("What would you like to do?");
         System.out.println();
 
@@ -25,26 +28,20 @@ public class UserInput {
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
 
-        if (option.equals("D"))
-        {
+        if (option.equals("D")) {
             return "display";
-        }
-        else if (option.equals("P")) {
+        } else if (option.equals("P")) {
 
             return "purchase";
-        }
-        else if (option.equals("E"))
-        {
+        } else if (option.equals("E")) {
             return "exit";
-        }
-        else
-        {
+        } else {
             return "";
         }
 
     }
 
-    public String getPurchaseOption(){
+    public String getPurchaseOption() {
         System.out.println("What would you like to do?");
         System.out.println();
 
@@ -60,19 +57,89 @@ public class UserInput {
 
         if (option.equals("M")) {
             return "insert";
-        }
-        else if (option.equals("S")) {
+        } else if (option.equals("S")) {
 
             return "select";
-        }
-        else if (option.equals("F"))
-        {
+        } else if (option.equals("F")) {
             return "finish";
-        }
-        else {
+        } else {
             return "";
         }
     }
 
-    
+    public BigDecimal getMoneyProvided() {
+        BigDecimal inserted;
+
+        System.out.println("Please insert $1, $5, $10, or $20.");
+        System.out.print("Insert: $");
+        double insert = scanner.nextDouble();
+        inserted = new BigDecimal(insert);
+
+        return inserted;
+    }
+
+    public String getSelectedItem() {
+        System.out.print("Enter the key of your selected item: ");
+        String select = scanner.nextLine();
+
+        return select;
+    }
+
+    public File setStockFile() {
+        Scanner userInput = new Scanner(System.in);
+
+        System.out.println("Please enter a path to input file: ");
+        System.out.print("Path: ");
+        String path = userInput.nextLine();
+        File stockFile = new File(path);
+
+        while (stockFile.exists() == false || stockFile.isFile() == false) {
+            try {
+                if (stockFile.exists() == false) {
+                    throw new FileNotFoundException(path + " does not exist.");
+                } else if (stockFile.isFile() == false) {
+                    throw new IOException(path + " is not a file.");
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.println("Please enter path to a valid file.");
+                System.out.print("Path: ");
+                path = userInput.nextLine();
+                stockFile = new File(path);
+            }
+        }
+            return stockFile;
+    }
+
+    public File setAuditFile() {
+        Scanner userInput = new Scanner(System.in);
+
+        System.out.println("Please enter a path to audit file: ");
+        System.out.print("Path: ");
+        String path = userInput.nextLine();
+        File auditFile = new File(path);
+
+        while (auditFile.exists() == false || auditFile.isFile() == false) {
+            try {
+                if (auditFile.exists() == false) {
+                    throw new FileNotFoundException(path + " does not exist.");
+                } else if (auditFile.isFile() == false) {
+                    throw new IOException(path + " is not a file.");
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.println("Please enter path to a valid file.");
+                System.out.print("Path: ");
+                path = userInput.nextLine();
+                auditFile = new File(path);
+            }
+        }
+        return auditFile;
+    }
 }

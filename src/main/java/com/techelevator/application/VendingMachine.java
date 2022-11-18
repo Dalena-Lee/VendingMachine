@@ -8,57 +8,52 @@ import com.techelevator.ui.UserOutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class VendingMachine {
-    Purchase purchase;
-    ItemManager itemManager;
-    Item item;
-    File stockFile;
+    private Purchase purchase;
+    private ItemManager itemManager;
+    private Item item;
+    private File stockFile;
+    private File auditFile;
 
     public VendingMachine() {
-    }
-
-    public void setStockFile(File stockFile) {
-        Scanner userInput = new Scanner(System.in);
-
-        System.out.println("Please enter a path to input file: ");
-        System.out.print("Path: ");
-        String path = userInput.nextLine();
-        stockFile = new File(path);
-
-        while (stockFile.exists() == false || stockFile.isFile() == false) {
-            try {
-                if (stockFile.exists() == false) {
-                    throw new FileNotFoundException(path + " does not exist.");
-                } else if (stockFile.isFile() == false) {
-                    throw new IOException(path + " is not a file.");
-                }
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                System.out.println("Please enter path to a valid file.");
-                System.out.print("Path: ");
-                path = userInput.nextLine();
-                stockFile = new File(path);
-            }
-        }
-        this.stockFile = stockFile;
-    }
-
-    public File getStockFile() {
-        return stockFile;
     }
 
     public void run() {
         UserOutput userOutput = new UserOutput();
         UserInput userInput = new UserInput();
-        setStockFile(stockFile);
+        this.stockFile = userInput.setStockFile();
+        this.auditFile = userInput.setAuditFile();
+
+        //Created a list of Item class objects and initializing itemManager with list.
+        List<Item> vendingItems = new ArrayList<>();
+        itemManager = new ItemManager(vendingItems);
+
+        //Created a string to display each line and added it to a list.
+        String displayItems = "";
+        List<String> displayItem = new ArrayList<>();
+
+        try (Scanner fileScanner = new Scanner(stockFile)) {
+            while (fileScanner.hasNextLine()) {
+                String eachLine = fileScanner.nextLine();
+                String[] vending = eachLine.split(",");
+
+                //For each line in the file, the line gets split and a new item object is initialized.
+                item = new Item(vending[0], vending[1], vending[2], vending[3]);
+
+                //Appending the new string.
+                displayItems = vending[0] + " " + vending[1] + " " + vending[2];
+                displayItem.add(displayItems);
+
+                //Added item into list of objects.
+                vendingItems.add(item);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         while(true){
             userOutput.displayHomeScreen();
@@ -66,50 +61,40 @@ public class VendingMachine {
 
             if(choice.equals("display")) {
                 // display the vending machine slots
-                try (Scanner fileScanner = new Scanner(stockFile)) {
-                    while (fileScanner.hasNextLine()) {
-                        String eachLine = fileScanner.nextLine();
-                        String[] vending = eachLine.split(",");
-                        String displayItems = "";
-
-                        for (int i = 0; i < vending.length - 1; i++){
-
-                            if (i == 2){
-                                displayItems += "$" + vending[i];
-                            }
-                            else {
-                                displayItems += vending[i];
-                                displayItems += " ";
-                            }
-                        }
-                        System.out.println(displayItems);
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                for (String s: displayItem){
+                    System.out.println(s);
                 }
             }
 
             else if(choice.equals("purchase")) {
-                purchase = new purchase();
-                // make a purchase
+                //purchase = new purchase();
                 String purchaseChoice = userInput.getPurchaseOption();
 
                 if (purchaseChoice.equals("insert")){
-                    System.out.println("Please insert $1, $5, $10, or $20.");
+                    BigDecimal inserted = userInput.getMoneyProvided();
+                    //set currentbalance to the money provided
+                    //record to audit
                 }
+
                 else if (purchaseChoice.equals("select")){
+                    //Prompt user to select an item using the item key.
+                    String selectedItem = userInput.getSelectedItem();
+
+                    //Iterate through the list of Item objects and select the item using input key.
+                    for(Item i: itemManager.getItems()) {
+                        String key = i.getItemKey();
+                        if (key.equals(selectedItem)) {
+                            //update and display currentBalance
+                            //record to audit
+                        }
+                    }
+
 
                 }
                 else if (purchaseChoice.equals("finish")){
-
+                    userOutput.displayHomeScreen();
                 }
-                //sout: "Please insert $1, $5, $10, or $20."
-                //userinput = $5;
-                //setCurrentBalance;
-                //setAction();
-                //userinput = $5;
-                //setCurrentBalance += userinput;
-                //setAction();
+
             }
 
             else if(choice.equals("exit")) {
