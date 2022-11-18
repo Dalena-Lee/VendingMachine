@@ -1,5 +1,6 @@
 package com.techelevator.application;
 
+import com.techelevator.Audit;
 import com.techelevator.Item;
 import com.techelevator.ItemManager;
 import com.techelevator.Purchase;
@@ -9,6 +10,7 @@ import com.techelevator.ui.UserOutput;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class VendingMachine {
@@ -20,14 +22,13 @@ public class VendingMachine {
     public void run() {
         UserOutput userOutput = new UserOutput();
         UserInput userInput = new UserInput();
-<<<<<<< HEAD
+
         File stockFile = userInput.setStockFile();
         File auditFile = userInput.setAuditFile();
-=======
-        ///ask user for path
-        this.stockFile = userInput.setStockFile();
-        this.auditFile = userInput.setAuditFile();
->>>>>>> 8eee546e0bc9df5ff3d2bf4f5b73be768b287243
+
+        List<String> auditStrings = new ArrayList<>();
+        Audit audit = new Audit(auditStrings);
+        String audits = "";
 
         //Created a list of Item class objects and initializing itemManager with list.
         List<Item> vendingItems = new ArrayList<>();
@@ -75,7 +76,14 @@ public class VendingMachine {
                 if (purchaseChoice.equals("insert")){
                     BigDecimal inserted = userInput.getMoneyProvided();
                     //set currentbalance to the money provided
-                    //record to audit
+                    purchase.setCurrentBalance(inserted);
+
+                    //Record to audit.txt
+                    BigDecimal currentBalance = purchase.getCurrentBalance();
+                    String insertMessage = "Money inserted: ";
+                    String currentTime = audit.getCurrentTime();
+                    audits = String.format("%-22d%-22d%-22d%-22d\n",currentTime, insertMessage, inserted, currentBalance);
+                    auditStrings.add(audits);
                 }
 
                 else if (purchaseChoice.equals("select")){
@@ -87,14 +95,24 @@ public class VendingMachine {
                     for(Item i: itemManager.getItems()) {
                         String key = i.getItemKey();
                         if (key.equals(selectedItem)) {
-//                            //update and display currentBalance
-//                            //record to audit
+                        //update and display currentBalance
+                            BigDecimal currentBalance = purchase.getCurrentBalance();
+                            BigDecimal balanceAfterPurchase = purchase.calculateChange(i.getPurchasePrice());
+                            System.out.println("Your remaining balance: " + purchase.getCurrentBalance());
+
+                            // record to audit
+                            String itemAudit = i.getItemName();
+                            String currentTime = audit.getCurrentTime();
+                            audits = String.format("%-22d%-22d%-22d%-22d%-22d\n",currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
+                            auditStrings.add(audits);
                         }
                     }
 
 
                 }
                 else if (purchaseChoice.equals("finish")){
+                    
+
                     userOutput.displayHomeScreen();
                 }
 
