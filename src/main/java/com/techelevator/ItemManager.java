@@ -12,8 +12,8 @@ public class ItemManager {
         this.items = items;
     }
 
-    public boolean isInStock(){
-        int stock = item.getStockCount();
+    public boolean isInStock(Item currentItem){
+        int stock = currentItem.getStockCount();
 
         if (stock == 0) {
             return false;
