@@ -24,6 +24,7 @@ public class VendingMachine {
     public void run() {
         UserOutput userOutput = new UserOutput();
         UserInput userInput = new UserInput();
+        ///ask user for path
         this.stockFile = userInput.setStockFile();
         this.auditFile = userInput.setAuditFile();
 
