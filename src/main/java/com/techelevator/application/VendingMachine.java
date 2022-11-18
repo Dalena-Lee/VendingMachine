@@ -13,10 +13,6 @@ import java.util.*;
 
 public class VendingMachine {
     private Purchase purchase;
-    private ItemManager itemManager;
-    private Item item;
-    private File stockFile;
-    private File auditFile;
 
     public VendingMachine() {
     }
@@ -24,12 +20,12 @@ public class VendingMachine {
     public void run() {
         UserOutput userOutput = new UserOutput();
         UserInput userInput = new UserInput();
-        this.stockFile = userInput.setStockFile();
-        this.auditFile = userInput.setAuditFile();
+        File stockFile = userInput.setStockFile();
+        File auditFile = userInput.setAuditFile();
 
         //Created a list of Item class objects and initializing itemManager with list.
         List<Item> vendingItems = new ArrayList<>();
-        itemManager = new ItemManager(vendingItems);
+        ItemManager itemManager = new ItemManager(vendingItems);
 
         //Created a string to display each line and added it to a list.
         String displayItems = "";
@@ -41,7 +37,7 @@ public class VendingMachine {
                 String[] vending = eachLine.split(",");
 
                 //For each line in the file, the line gets split and a new item object is initialized.
-                item = new Item(vending[0], vending[1], vending[2], vending[3]);
+                Item item = new Item(vending[0], vending[1], vending[2], vending[3]);
 
                 //Appending the new string.
                 displayItems = vending[0] + " " + vending[1] + " " + vending[2];
@@ -80,12 +76,13 @@ public class VendingMachine {
                     //Prompt user to select an item using the item key.
                     String selectedItem = userInput.getSelectedItem();
 
+                    List<String> samePurchasePrice = new ArrayList<>();
                     //Iterate through the list of Item objects and select the item using input key.
                     for(Item i: itemManager.getItems()) {
                         String key = i.getItemKey();
                         if (key.equals(selectedItem)) {
-                            //update and display currentBalance
-                            //record to audit
+//                            //update and display currentBalance
+//                            //record to audit
                         }
                     }
 

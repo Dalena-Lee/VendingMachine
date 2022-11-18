@@ -3,12 +3,6 @@ package com.techelevator;
 import java.math.BigDecimal;
 
 public class Item {
-<<<<<<< HEAD
-    //Variables
-    BigDecimal
-
-
-=======
     private int stockCount = 6;
     private BigDecimal purchasePrice;
     private String itemName;
@@ -62,5 +56,4 @@ public class Item {
     public void setPurchasePrice(BigDecimal purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
->>>>>>> 7827d06dbbc073d227ae8046870375e648dd0c71
 }

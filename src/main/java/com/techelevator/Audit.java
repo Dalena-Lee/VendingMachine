@@ -2,10 +2,8 @@ package com.techelevator;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Audit extends Purchase{
+public class Audit extends Purchase {
     String audit;
     File auditFile;
     LocalDateTime dateTime;

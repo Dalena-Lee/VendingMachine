@@ -7,6 +7,7 @@ public class ItemManager {
     private Item item;
     private List<Item> items = new ArrayList<>();
 
+    //
     public ItemManager(List<Item> items) {
         this.items = items;
     }
