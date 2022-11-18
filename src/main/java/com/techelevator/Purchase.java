@@ -8,11 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
 public class Purchase {
-<<<<<<< HEAD
     private BigDecimal purchasePrice;
-=======
-
->>>>>>> 5dde42d12f31d5b351cd2cc5e75d026e41a766c6
     private BigDecimal currentBalance;
 
     private BigDecimal nickels;
@@ -38,7 +34,7 @@ public class Purchase {
     }
 
     public BigDecimal calculateChange(BigDecimal purchasePrice){
-        currentBalance -= purchasePrice;
+        //currentBalance -= purchasePrice;
         // if bogodo is true, buy one, get second off for a dollar, resets after bogodo price
         return currentBalance;
     }
@@ -74,12 +70,8 @@ public class Purchase {
             return true;
         }
     }
-<<<<<<< HEAD
     //getCurrentBalance(); //purchasePrice, selectedItem,
     //boolean isThanksgiving; get local date and time
     int purchasesUntilBOGODO;
-=======
 
-
->>>>>>> 5dde42d12f31d5b351cd2cc5e75d026e41a766c6
 }

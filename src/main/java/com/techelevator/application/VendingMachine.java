@@ -112,9 +112,10 @@ public class VendingMachine {
                 }
                 else if (purchaseChoice.equals("finish")){
                     BigDecimal currentBalance = purchase.getCurrentBalance();
+                    BigDecimal balanceWhenExit = BigDecimal.valueOf(0.00);
                     String changeMessage = "CHANGE GIVEN: ";
                     String currentTime = audit.getCurrentTime();
-                    audits = String.format("%-22d%-22d%-22d%-22d\n",currentTime, changeMessage, , currentBalance);
+                    audits = String.format("%-22d%-22d%-22d%-22d\n",currentTime, changeMessage, currentBalance, balanceWhenExit);
                     auditStrings.add(audits);
 
                     userOutput.displayHomeScreen();
