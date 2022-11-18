@@ -53,13 +53,12 @@ public class Purchase {
 
         //gives first of nov of current year
         LocalDate firstNov = LocalDate.of(year, 11, 1);
-        int dayOfThanks = 0;
 
         // if first day of nov is thursday:
         if (firstNov.getDayOfWeek().equals(DayOfWeek.THURSDAY)){
 
             //setting thanksgiving day
-             dayOfThanks = firstNov.plusWeeks(3).getDayOfMonth();
+             int dayOfThanks = firstNov.plusWeeks(3).getDayOfMonth();
             LocalDate thanksgiving = LocalDate.of(year, 11, dayOfThanks);
                 if (now.equals(thanksgiving)){
                     return true;
@@ -69,7 +68,7 @@ public class Purchase {
 
                 //first day of nov isn't thurs
         } else {
-           dayOfThanks = firstNov.with(TemporalAdjusters.next(DayOfWeek.THURSDAY)).plusWeeks(3).getDayOfMonth();
+           int dayOfThanks = firstNov.with(TemporalAdjusters.next(DayOfWeek.THURSDAY)).plusWeeks(3).getDayOfMonth();
            //setting day of thanks
             LocalDate thanksgiving = LocalDate.of(year, 11, dayOfThanks);
             return true;
