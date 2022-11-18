@@ -73,6 +73,7 @@ public class VendingMachine {
                                     //update and display currentBalance
                                     purchase.countNumberOfItems();
                                     purchase.setCurrentBalance(balanceAfterPurchase);
+                                    i.decreaseStock();
                                     System.out.println("Your remaining balance: " + purchase.getCurrentBalance());
                                 }
 
@@ -97,6 +98,7 @@ public class VendingMachine {
                         audit.recordToAudit(currentTime, changeMessage, currentBalance, emptyBalance);
                         break Innerloop;
                     }
+                    System.out.println("Current Balance: " + purchase.getCurrentBalance());
                 }
             }
             else if(choice.equals("exit")) {
