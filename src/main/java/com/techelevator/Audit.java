@@ -1,6 +1,8 @@
 package com.techelevator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +14,16 @@ public class Audit {
 
     public Audit(List<String> auditStrings) {
         this.auditStrings = auditStrings;
+    }
+
+    public void printToFile(File auditFile){
+        try (PrintWriter fileWriter = new PrintWriter(auditFile)) {
+            for (String s: auditStrings){
+                fileWriter.println(s);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getCurrentTime() {

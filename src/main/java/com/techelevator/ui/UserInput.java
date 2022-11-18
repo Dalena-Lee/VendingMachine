@@ -68,13 +68,13 @@ public class UserInput {
     }
 
     public BigDecimal getMoneyProvided() {
-        BigDecimal inserted;
 
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
-        double insert = scanner.nextDouble();
-        inserted = new BigDecimal(insert);
-
+        String insert = scanner.nextLine();
+        double n = Double.parseDouble(insert);
+        BigDecimal inserted = new BigDecimal(n);
+        System.out.println(inserted);
         return inserted;
     }
 
