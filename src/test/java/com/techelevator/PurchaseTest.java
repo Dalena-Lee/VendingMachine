@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 //isBOGODOtest, return boolean (check if given date/year is on thanksgiving)
 
-
 public class PurchaseTest {
     @Test
     public void testInitialMoney(){
@@ -24,20 +23,11 @@ public class PurchaseTest {
     public void testMoneyAdd(){
         Purchase purchaseTest = new Purchase();
         BigDecimal depositAmount = new BigDecimal("30");
-        purchaseTest.addMoney(depositAmount);
+        purchaseTest.setCurrentBalance(depositAmount);
         BigDecimal actualBalance = purchaseTest.getCurrentBalance();
         Assert.assertTrue(depositAmount.compareTo(actualBalance)==0 );
 
     }
-    @Test
-    public void notEnoughMoneyAdd(){
-        Purchase purchaseTest = new Purchase();
-        BigDecimal depositAmount = new BigDecimal("1");
-        purchaseTest.addMoney(depositAmount);
-        BigDecimal actualBalance = purchaseTest.getCurrentBalance();
-        Assert.assertTrue(depositAmount.compareTo(actualBalance)==-1 );
-
-    }
 
 
 
@@ -48,6 +38,7 @@ public class PurchaseTest {
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -58,4 +49,6 @@ public class PurchaseTest {
 
 
 
+=======
+>>>>>>> 1dd2e1404f5857eadbc59b51c623bcaf8718f9be
 }

@@ -5,9 +5,8 @@ import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
 
 public class VendingMachine {
 
@@ -84,24 +83,26 @@ public class VendingMachine {
                     }
 
                     else if (purchaseChoice.equals("finish")) {
-                        BigDecimal currentBalance = purchase.getCurrentBalance();
-                        System.out.println(purchase.receiveChange());
-                        //Customers receive remaining change
-                        //Change is returned using nickels, dimes, quarters, and single dollars
-                        //Use the smallest amount of coins possible.
+                        BigDecimal balanceBeforeChange = purchase.getCurrentBalance();
+                        List<String> changeList = purchase.receiveChange();
+                        for (String s: changeList) {
+                            System.out.println(s);
+                        }
                         //Update balance
 
                         //Record to audit.txt.
+                        BigDecimal balanceAfterChange = purchase.getCurrentBalance();
                         String changeMessage = "CHANGE GIVEN: ";
                         String currentTime = audit.getCurrentTime();
-                        String emptyBalance = "0.00";
-                        audit.recordToAudit(currentTime, changeMessage, currentBalance, emptyBalance);
+                        audit.recordToAudit(currentTime, changeMessage, balanceBeforeChange, balanceAfterChange);
                         audit.addAuditString("");
                         break Innerloop;
                     }
+
                     System.out.println();
                     System.out.println("Remaining Balance: $" + purchase.getCurrentBalance());
                     System.out.println();
+
                 }
             }
             else if(choice.equals("exit")) {
