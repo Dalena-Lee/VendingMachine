@@ -98,6 +98,7 @@ public class UserInput {
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
         String insert = scanner.nextLine();
+<<<<<<< HEAD
         while (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
             try {
                 if (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
@@ -111,6 +112,11 @@ public class UserInput {
                 insert = insert.trim().toUpperCase();
             }
         }
+=======
+
+
+
+>>>>>>> a75ee199935c6ea6e03d5354bf10268a0da5765e
         double n = Double.parseDouble(insert);
         BigDecimal inserted = new BigDecimal(n);
 

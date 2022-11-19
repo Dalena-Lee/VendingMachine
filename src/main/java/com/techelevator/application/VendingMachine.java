@@ -5,6 +5,7 @@ import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 import java.io.File;
 import java.math.BigDecimal;
+import java.time.Month;
 
 public class VendingMachine {
 
@@ -64,10 +65,10 @@ public class VendingMachine {
                                     purchase.countNumberOfItems();
 
                                     // record to audit and calculate change
-                                    BigDecimal currentBalance = purchase.getCurrentBalance();
-                                    BigDecimal balanceAfterPurchase = purchase.calculateChange(i.getPurchasePrice());
-                                    String itemAudit = i.getItemName();
                                     String currentTime = audit.getCurrentTime();
+                                    BigDecimal currentBalance = purchase.getCurrentBalance();
+                                    BigDecimal balanceAfterPurchase = purchase.calculateChange(i.getPurchasePrice(), currentTime.equals(Month.NOVEMBER));
+                                    String itemAudit = i.getItemName();
                                     audit.recordToAudit(currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
 
                                     //update stock
