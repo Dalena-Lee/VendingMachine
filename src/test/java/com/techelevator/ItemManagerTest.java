@@ -11,6 +11,7 @@ public class ItemManagerTest {
     @Test
     public void inStock(){
         //Arrange
+
         List<Item> testItems = new ArrayList<>();
         Item firstItem = new Item("A1", "Peppsi", "1.65" ,"drink");
         testItems.add(firstItem);
@@ -25,11 +26,11 @@ public class ItemManagerTest {
         Assert.assertTrue(actual);
     }
     @Test
-    public void outOfStock(){
+    public void outOfStock() {
         List<Item> testItems = new ArrayList<>();
-        Item firstItem = new Item("A1", "Peppsi", "1.65" ,"drink");
+        Item firstItem = new Item("A1", "Peppsi", "1.65", "drink");
         testItems.add(firstItem);
-        testItems.add(new Item("A5", "Poppit", "1.35" ,"gum"));
+        testItems.add(new Item("A5", "Poppit", "1.35", "gum"));
         ItemManager itemManager = new ItemManager(testItems);
         for (int i = 0; i < 5; i++) {
             itemManager.decreaseStock("A1");
@@ -45,19 +46,5 @@ public class ItemManagerTest {
         actual = itemManager.isInStock(firstItem);
         Assert.assertFalse(actual);
 
-
     }
-//    @Test
-//    public void overStock(){
-//        //Arrange
-//        ItemManager itemManager = new ItemManager();
-//        int stockCount = 7;
-//
-//        //Act
-//        boolean actual = itemManager.isInStock(stockCount);
-//
-//        //Assert
-//        Assert.assertFalse();
-//    }
-
 }

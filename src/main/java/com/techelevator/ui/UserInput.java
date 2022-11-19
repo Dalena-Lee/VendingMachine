@@ -24,6 +24,7 @@ public class UserInput {
 
         System.out.println();
         System.out.print("Please select an option: ");
+        System.out.println();
 
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
