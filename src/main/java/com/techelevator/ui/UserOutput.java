@@ -3,6 +3,7 @@ package com.techelevator.ui;
 import com.techelevator.application.VendingMachine;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,18 +13,24 @@ import java.util.Map;
  * Dependencies: None
  */
 public class UserOutput {
-    //This outputs all messages that are printed, so when the balance updates, we call the method userOutput.somemethod()
-    //- All munchy items print "Munchy, Munchy, so Good!" => displayMunchyPurchase(String)
-    //- All candy items print  "Sugar, Sugar, so Sweet!" => displayCandyPurchase()
-    //- All drink items print  "Drinky, Drinky, Slurp Slurp!" => displayDrinkPurchase()
-    //- All gum items print    "Chewy, Chewy, Lots O Bubbles!" = displayGumPurchase()
-    //displayCurrentBalance()
-    //displayChange()
 
-    public void displayMessage(String message){
-        System.out.println();
-        System.out.println(message);
-        System.out.println();
+    public void displayMessage(String type){
+
+        if(type.equalsIgnoreCase("munchy")) {
+            System.out.println("Munchy, Munchy, so Good!");
+        }
+
+        else if (type.equalsIgnoreCase("candy")) {
+            System.out.println("Sugar, Sugar, so Sweet!");
+        }
+
+        else if (type.equalsIgnoreCase("drink")) {
+            System.out.println("Drinky, Drinky, Slurp Slurp!");
+        }
+
+        else if (type.equalsIgnoreCase("gum")) {
+            System.out.println("Chewy, Chewy, Lots O Bubbles!");
+        }
     }
 
     public void displayHomeScreen(){
@@ -32,6 +39,13 @@ public class UserOutput {
         System.out.println("                      Home");
         System.out.println("***************************************************");
         System.out.println();
+    }
+
+    public void displayChange(List<String> changeList){
+        List<String> display = changeList;
+        for (String s: changeList) {
+            System.out.println(s);
+        }
     }
 
 }
