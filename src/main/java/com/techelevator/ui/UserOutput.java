@@ -1,10 +1,6 @@
 package com.techelevator.ui;
 
-import com.techelevator.application.VendingMachine;
-
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Responsibilities: This class should handle formatting and displaying ALL

@@ -29,17 +29,33 @@ public class UserInput {
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
 
-        if (option.equals("D")) {
-            return "display";
-        } else if (option.equals("P")) {
+        while (!option.equals("D") || !option.equals("P") || !option.equals("E"))
+            try {
+                if (!option.equals("D") && !option.equals("P") && !option.equals("E")) {
+                    throw new IllegalArgumentException("Please enter D, P, or E as your choice.");
+                }
 
-            return "purchase";
-        } else if (option.equals("E")) {
-            return "exit";
-        } else {
-            return "";
+        } catch (IllegalArgumentException e){
+            e.getMessage();
+
+        } finally {
+            selectedOption = scanner.nextLine();
+            option = selectedOption.trim().toUpperCase();
         }
 
+        if (option.equals("D")) {
+            return "display";
+        }
+
+        else if (option.equals("P")) {
+            return "purchase";
+        }
+
+        else if (option.equals("E")) {
+            return "exit";
+        }
+
+        return "";
     }
 
     public String getPurchaseOption() {
@@ -69,7 +85,7 @@ public class UserInput {
     }
 
     public BigDecimal getMoneyProvided() {
-
+        //Create a while loop with a try catch statement that catches if the user inputs anything other than 1, 5, 10, or 20.
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
         String insert = scanner.nextLine();
@@ -81,7 +97,6 @@ public class UserInput {
     public String getSelectedItem() {
         System.out.print("Enter the key of your selected item: ");
         String select = scanner.nextLine();
-
         return select;
     }
 
