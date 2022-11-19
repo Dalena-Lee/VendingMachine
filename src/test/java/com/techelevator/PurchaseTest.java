@@ -37,11 +37,6 @@ public class PurchaseTest {
 
 
 
-
-<<<<<<< HEAD
-
-
-
 }
 
 
