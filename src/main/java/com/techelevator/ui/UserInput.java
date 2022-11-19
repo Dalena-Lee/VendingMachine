@@ -29,32 +29,27 @@ public class UserInput {
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
 
-        while (!option.equals("D") || !option.equals("P") || !option.equals("E"))
+        while (!option.equals("D") && !option.equals("P") && !option.equals("E")) {
             try {
                 if (!option.equals("D") && !option.equals("P") && !option.equals("E")) {
                     throw new IllegalArgumentException("Please enter D, P, or E as your choice.");
                 }
-
-        } catch (IllegalArgumentException e){
-            e.getMessage();
-
-        } finally {
-            selectedOption = scanner.nextLine();
-            option = selectedOption.trim().toUpperCase();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.print("Select an option: ");
+                selectedOption = scanner.nextLine();
+                option = selectedOption.trim().toUpperCase();
+            }
         }
 
-        if (option.equals("D")) {
+        if (option.equalsIgnoreCase("D")) {
             return "display";
-        }
-
-        else if (option.equals("P")) {
+        } else if (option.equalsIgnoreCase("P")) {
             return "purchase";
-        }
-
-        else if (option.equals("E")) {
+        } else if (option.equalsIgnoreCase("E")) {
             return "exit";
         }
-
         return "";
     }
 
@@ -126,7 +121,7 @@ public class UserInput {
                 stockFile = new File(path);
             }
         }
-            return stockFile;
+        return stockFile;
     }
 
     public File setAuditFile() {
