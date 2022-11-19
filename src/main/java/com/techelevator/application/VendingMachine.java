@@ -70,11 +70,10 @@ public class VendingMachine {
                                     String currentTime = audit.getCurrentTime();
                                     audit.recordToAudit(currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
 
-                                    //update and display currentBalance
+                                    //update currentBalance
                                     purchase.countNumberOfItems();
                                     purchase.setCurrentBalance(balanceAfterPurchase);
                                     i.decreaseStock();
-                                    System.out.println("Your remaining balance: " + purchase.getCurrentBalance());
                                 }
 
                                 else {
@@ -86,6 +85,7 @@ public class VendingMachine {
 
                     else if (purchaseChoice.equals("finish")) {
                         BigDecimal currentBalance = purchase.getCurrentBalance();
+                        System.out.println(purchase.receiveChange());
                         //Customers receive remaining change
                         //Change is returned using nickels, dimes, quarters, and single dollars
                         //Use the smallest amount of coins possible.
@@ -96,9 +96,12 @@ public class VendingMachine {
                         String currentTime = audit.getCurrentTime();
                         String emptyBalance = "0.00";
                         audit.recordToAudit(currentTime, changeMessage, currentBalance, emptyBalance);
+                        audit.addAuditString("");
                         break Innerloop;
                     }
-                    System.out.println("Current Balance: " + purchase.getCurrentBalance());
+                    System.out.println();
+                    System.out.println("Remaining Balance: $" + purchase.getCurrentBalance());
+                    System.out.println();
                 }
             }
             else if(choice.equals("exit")) {

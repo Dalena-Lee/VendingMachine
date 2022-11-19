@@ -16,12 +16,12 @@ public class PurchaseTest extends TestCase {
     public void isBOGODO(){
     //Arrange
     PurchaseTest purchaseTest = new PurchaseTest();
-    LocalDate now = LocalDate.of(11, 24);
+    //LocalDate now = LocalDate.of(11, 24);
     int year = 2022;
-    boolean isT
+    //boolean isT
 
     //Act, get return type and apply method to new test object
-    Boolean actual = purchaseTest.isBOGODO();
+    //Boolean actual = purchaseTest.isBOGODO();
 
     //Assert
 
