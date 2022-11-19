@@ -44,7 +44,7 @@ public class VendingMachine {
                     if (purchaseChoice.equals("insert")) {
                         BigDecimal inserted = userInput.getMoneyProvided();
                         //set current balance to the money provided
-                        purchase.updateCurrentBalance(inserted);
+                        purchase.setCurrentBalance(inserted);
 
                         //Record to audit.txt
                         BigDecimal currentBalance = purchase.getCurrentBalance();
@@ -71,7 +71,7 @@ public class VendingMachine {
 
                                     //update currentBalance
                                     purchase.countNumberOfItems();
-                                    purchase.updateCurrentBalance(balanceAfterPurchase);
+                                    purchase.setCurrentBalance(balanceAfterPurchase);
                                     i.decreaseStock();
                                 }
 
