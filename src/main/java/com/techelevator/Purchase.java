@@ -2,10 +2,8 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
