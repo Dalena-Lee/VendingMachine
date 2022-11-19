@@ -28,4 +28,19 @@ public class PurchaseTest {
         Assert.assertTrue(depositAmount.compareTo(actualBalance)==0 );
 
     }
+    @Test
+    public void calculateChange(){
+        Purchase purchaseTest = new Purchase();
+        BigDecimal changeAmount = new BigDecimal("5");
+        purchaseTest.calculateChange(changeAmount);
+        BigDecimal expectedBalance = BigDecimal("3.35");
+        BigDecimal actualBalance = purchaseTest.calculateChange();
+        Assert.
+
+    }
+    //test for is bogodo
+
+
+
+
 }
