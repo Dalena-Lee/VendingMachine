@@ -3,10 +3,8 @@ package com.techelevator.application;
 import com.techelevator.*;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
-
 import java.io.File;
 import java.math.BigDecimal;
-import java.util.List;
 
 public class VendingMachine {
 
