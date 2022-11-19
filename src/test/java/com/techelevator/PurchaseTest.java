@@ -31,11 +31,28 @@ public class PurchaseTest {
     @Test
     public void calculateChange(){
         Purchase purchaseTest = new Purchase();
-        BigDecimal changeAmount = new BigDecimal("5");
-        purchaseTest.calculateChange(changeAmount);
-        BigDecimal expectedBalance = BigDecimal("3.35");
-        BigDecimal actualBalance = purchaseTest.calculateChange();
-        Assert.
+        BigDecimal testChange = new BigDecimal("5");
+        BigDecimal testPrice = new BigDecimal("2.50");
+        BigDecimal expectedBalance = new BigDecimal("2.50");
+
+        purchaseTest.addToBalance(testChange);
+        BigDecimal actualBalance = purchaseTest.calculateChange(testPrice);
+
+        Assert.assertEquals(expectedBalance, actualBalance);
+
+    }
+    @Test
+    public void calculateChangeNovember(){
+        Purchase purchaseTest = new Purchase();
+        BigDecimal testChange = new BigDecimal("5");
+        BigDecimal testPrice = new BigDecimal("2.50");
+        BigDecimal expectedBalance = new BigDecimal("2.50");
+
+        purchaseTest.addToBalance(testChange);
+        BigDecimal actualBalance = purchaseTest.calculateChange(testPrice);
+
+        Assert.assertEquals(expectedBalance, actualBalance);
+
 
     }
     //test for is bogodo

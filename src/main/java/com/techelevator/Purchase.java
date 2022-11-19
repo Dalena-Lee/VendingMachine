@@ -43,7 +43,8 @@ public class Purchase {
     }
 
     public BigDecimal calculateChange(BigDecimal purchasePrice) {
-        if (isBOGODO()) {
+        LocalDate now = LocalDate.now();
+        if (now.getMonth().equals(Month.NOVEMBER)) {
             if (numberOfItems % 2 == 0) {
                 purchasePrice = purchasePrice.subtract(BigDecimal.ONE);
             }
@@ -52,14 +53,6 @@ public class Purchase {
         return currentBalance;
     }
 
-    public boolean isBOGODO(){
-        LocalDate now = LocalDate.now();
-
-        if (now.getMonth().equals(Month.NOVEMBER)) {
-            return true;
-        }
-        return false;
-    }
 
 
     public List<String> receiveChange(){
