@@ -23,7 +23,7 @@ public class PurchaseTest {
     public void testMoneyAdd(){
         Purchase purchaseTest = new Purchase();
         BigDecimal depositAmount = new BigDecimal("30");
-        purchaseTest.setCurrentBalance(depositAmount);
+        purchaseTest.addToBalance(depositAmount);
         BigDecimal actualBalance = purchaseTest.getCurrentBalance();
         Assert.assertTrue(depositAmount.compareTo(actualBalance)==0 );
 

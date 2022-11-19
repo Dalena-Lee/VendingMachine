@@ -44,7 +44,7 @@ public class VendingMachine {
                     if (purchaseChoice.equals("insert")) {
                         BigDecimal inserted = userInput.getMoneyProvided();
                         //set current balance to the money provided
-                        purchase.setCurrentBalance(inserted);
+                        purchase.addToBalance(inserted);
 
                         //Record to audit.txt
                         BigDecimal currentBalance = purchase.getCurrentBalance();
@@ -62,17 +62,23 @@ public class VendingMachine {
                             String key = i.getItemKey();
                             if (key.equals(selectedItem)) {
                                 if (itemManager.isInStock(i)) {
-                                    // record to audit
+                                    //Count item for isBogodo and calculateChange method
+                                    purchase.countNumberOfItems();
+
+                                    // record to audit and calculate change
                                     BigDecimal currentBalance = purchase.getCurrentBalance();
                                     BigDecimal balanceAfterPurchase = purchase.calculateChange(i.getPurchasePrice());
                                     String itemAudit = i.getItemName();
                                     String currentTime = audit.getCurrentTime();
                                     audit.recordToAudit(currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
 
-                                    //update currentBalance
-                                    purchase.countNumberOfItems();
-                                    purchase.setCurrentBalance(balanceAfterPurchase);
+                                    //update stock
                                     i.decreaseStock();
+
+                                    //display message and dispense item
+                                    System.out.println();
+                                    System.out.println("You received " + i.getItemName() + ".");
+                                    userOutput.displayMessage(i.getType());
                                 }
 
                                 else {
@@ -84,11 +90,7 @@ public class VendingMachine {
 
                     else if (purchaseChoice.equals("finish")) {
                         BigDecimal balanceBeforeChange = purchase.getCurrentBalance();
-                        List<String> changeList = purchase.receiveChange();
-                        for (String s: changeList) {
-                            System.out.println(s);
-                        }
-                        //Update balance
+                        userOutput.displayChange(purchase.receiveChange());
 
                         //Record to audit.txt.
                         BigDecimal balanceAfterChange = purchase.getCurrentBalance();
@@ -107,7 +109,6 @@ public class VendingMachine {
             }
             else if(choice.equals("exit")) {
                 audit.printToFile(auditFile);
-                //good bye
                 break;
             }
         }

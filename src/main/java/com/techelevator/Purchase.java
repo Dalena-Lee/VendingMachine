@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.Locale;
 
 public class Purchase {
 
-    private BigDecimal purchasePrice;
     private BigDecimal currentBalance;
 
     private int numberOfItems;
@@ -25,15 +25,19 @@ public class Purchase {
     BigDecimal twentyDollarBill = BigDecimal.valueOf(20.00);
 
     public Purchase() {
-        //currentBalance = BigDecimal.ZERO;
+        currentBalance = BigDecimal.ZERO;
+    }
+
+    public int getNumberOfItems() {
+        return numberOfItems;
     }
 
     public BigDecimal getCurrentBalance() {
         return currentBalance;
     }
 
-    public void setCurrentBalance(BigDecimal balanceToAdd) {
-        currentBalance = balanceToAdd;
+    public void addToBalance(BigDecimal deposit) {
+        currentBalance = currentBalance.add(deposit);
     }
 
     public void countNumberOfItems(){
@@ -41,35 +45,19 @@ public class Purchase {
     }
 
     public BigDecimal calculateChange(BigDecimal purchasePrice) {
-        BigDecimal currentBalance = getCurrentBalance();
-        currentBalance = currentBalance.subtract(purchasePrice);
-
         if (isBOGODO()) {
             if (numberOfItems % 2 == 0) {
                 purchasePrice = purchasePrice.subtract(BigDecimal.ONE);
             }
         }
+        currentBalance = currentBalance.subtract(purchasePrice);
         return currentBalance;
     }
 
     public boolean isBOGODO(){
         LocalDate now = LocalDate.now();
-        int year = now.getYear();
 
-        LocalDate firstNov = LocalDate.of(year, 11, 1);
-
-        if (firstNov.getDayOfWeek().equals(DayOfWeek.THURSDAY)) {
-            int dayOfThanks = firstNov.plusWeeks(3).getDayOfMonth();
-            LocalDate thanksgiving = LocalDate.of(year, 11, dayOfThanks);
-
-            if (now.equals(thanksgiving)) {
-                return true;
-            }
-        }
-
-        else {
-            int dayOfThanks = firstNov.with(TemporalAdjusters.next(DayOfWeek.THURSDAY)).plusWeeks(3).getDayOfMonth();
-            LocalDate thanksgiving = LocalDate.of(year, 11, dayOfThanks);
+        if (now.getMonth().equals(Month.NOVEMBER)) {
             return true;
         }
         return false;
