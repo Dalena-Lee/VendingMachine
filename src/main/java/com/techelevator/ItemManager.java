@@ -27,6 +27,14 @@ public class ItemManager {
         items.add(item);
     }
 
+    public void decreaseStock(String itemKey){
+        for (Item eachItem: items)
+            //getting itemkey from user, compare to itemlist we have, then decrease stock
+            if (itemKey.equals(eachItem.getItemKey())){
+                eachItem.decreaseStock();
+            }
+    }
+
     public List<Item> getItems() {
         return items;
     }

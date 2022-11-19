@@ -13,7 +13,11 @@ public class Purchase {
 
     private BigDecimal purchasePrice;
 
+<<<<<<< HEAD
     private BigDecimal currentBalance = BigDecimal.valueOf(0);
+=======
+    private BigDecimal currentBalance;
+>>>>>>> 19ce070004ea77878da2885ab5093d1611562899
     private int numberOfItems;
 
     BigDecimal nickels = BigDecimal.valueOf(0.05);
@@ -25,12 +29,14 @@ public class Purchase {
     BigDecimal twentyDollarBill = BigDecimal.valueOf(20.00);
 
     public Purchase() {
+        currentBalance = BigDecimal.ZERO;
     }
 
     public BigDecimal getCurrentBalance() {
         return currentBalance;
     }
 
+<<<<<<< HEAD
     public void updateCurrentBalance(BigDecimal balanceToAdd) {
         this.currentBalance.add(balanceToAdd);
     }
@@ -42,20 +48,59 @@ public class Purchase {
     public BigDecimal calculateChange(BigDecimal purchasePrice) {
         BigDecimal currentBalance = getCurrentBalance();
         currentBalance = currentBalance.subtract(purchasePrice);
+=======
+    public void addMoney(BigDecimal depositAmount){
+        currentBalance = currentBalance.add(depositAmount);
+    }
+    public void setCurrentBalance(BigDecimal currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    public void countNumberOfItems() {
+
+
+
+        numberOfItems++;
+    }
+
+
+    public BigDecimal calculateChange(BigDecimal purchasePrice) {
+        BigDecimal currentBalance = getCurrentBalance();
+        currentBalance = currentBalance.subtract(purchasePrice);
+
+        // if bogodo is true, buy one, get second off for a dollar, resets after bogodo price
+        //increment by 2, i <
+
+>>>>>>> 19ce070004ea77878da2885ab5093d1611562899
 
         if (isBOGODO()) {
             if (numberOfItems % 2 == 0) {
-                purchasePrice = purchasePrice.subtract(BigDecimal.valueOf(1.00));
-                currentBalance = currentBalance.subtract(purchasePrice);
+
+                purchasePrice = purchasePrice.subtract(BigDecimal.ONE);
             }
-        } else {
-            currentBalance = currentBalance.subtract(purchasePrice);
         }
+<<<<<<< HEAD
 
         return currentBalance;
     }
 
     public boolean isBOGODO(){
+=======
+            currentBalance =currentBalance.subtract(purchasePrice);
+      return currentBalance;
+
+
+
+    }
+
+
+    public boolean isBOGODO(){
+     // get date of first nov of current year
+        // if 11/1 is thurs, add three weeks
+        // if not, find first thursday and then add three weeks
+        // if current day is thanksgiving , then return true bogodo
+
+>>>>>>> 19ce070004ea77878da2885ab5093d1611562899
         LocalDate now = LocalDate.now();
         int year = now.getYear();
 
@@ -78,7 +123,12 @@ public class Purchase {
         return false;
     }
 
+<<<<<<< HEAD
     public List<String> receiveChange() {
+=======
+
+    public String receiveChange() {
+>>>>>>> 19ce070004ea77878da2885ab5093d1611562899
         BigDecimal change = currentBalance;
         List<String> changeList = new ArrayList<>();
 
@@ -101,6 +151,7 @@ public class Purchase {
                 changeList.add(i.intValue() + " Five Dollar Bills");
             }
 
+<<<<<<< HEAD
         BigDecimal oneDollarNext = fiveDollarNext.subtract(fiveDollarBill.multiply(BigDecimal.valueOf(i.intValue())));
         BigDecimal f = oneDollarNext.divide(oneDollarBill);
             if (f.intValue() != 0) {
@@ -129,5 +180,10 @@ public class Purchase {
             return changeList;
 
         }
+=======
+        }
+        return changeGiven;
+    }
+>>>>>>> 19ce070004ea77878da2885ab5093d1611562899
 
 }
