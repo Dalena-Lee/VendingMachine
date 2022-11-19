@@ -6,6 +6,15 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
 public class Purchase {
+<<<<<<< HEAD
+=======
+
+    private BigDecimal purchasePrice;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5f107f2361184ac8d19d531683c9987781327e77
+>>>>>>> 5463aeb7ce2a3621f80a9316b0613c9582ad29ec
     private BigDecimal currentBalance;
     private int numberOfItems;
 
@@ -28,13 +37,33 @@ public class Purchase {
         this.currentBalance = currentBalance;
     }
 
+<<<<<<< HEAD
     public void countNumberOfItems() {
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5f107f2361184ac8d19d531683c9987781327e77
+    public void countNumberOfItems(){
+>>>>>>> 5463aeb7ce2a3621f80a9316b0613c9582ad29ec
         numberOfItems++;
     }
 
+<<<<<<< HEAD
+
+    public BigDecimal calculateChange(BigDecimal purchasePrice){
+        BigDecimal currentBalance -= purchasePrice;
+
+=======
     public BigDecimal calculateChange(BigDecimal purchasePrice) {
         BigDecimal currentBalance = getCurrentBalance();
         currentBalance = currentBalance.subtract(purchasePrice);
+<<<<<<< HEAD
+=======
+>>>>>>> 5f107f2361184ac8d19d531683c9987781327e77
+        // if bogodo is true, buy one, get second off for a dollar, resets after bogodo price
+        //increment by 2, i <
+>>>>>>> 5463aeb7ce2a3621f80a9316b0613c9582ad29ec
 
         if (isBOGODO()) {
             if (numberOfItems % 2 == 0) {
@@ -44,10 +73,25 @@ public class Purchase {
         } else {
             currentBalance = currentBalance.subtract(purchasePrice);
         }
+<<<<<<< HEAD
         return currentBalance;
     }
 
     public boolean isBOGODO() {
+=======
+<<<<<<< HEAD
+=======
+    }
+
+>>>>>>> 5f107f2361184ac8d19d531683c9987781327e77
+
+
+    public boolean isBOGODO(){
+     // get date of first nov of current year
+        // if 11/1 is thurs, add three weeks
+        // if not, find first thursday and then add three weeks
+        // if current day is thanksgiving , then return true bogodo
+>>>>>>> 5463aeb7ce2a3621f80a9316b0613c9582ad29ec
         LocalDate now = LocalDate.now();
         int year = now.getYear();
 
@@ -69,6 +113,7 @@ public class Purchase {
         return false;
     }
 
+<<<<<<< HEAD
     public String receiveChange() {
         BigDecimal change = currentBalance;
         String changeGiven = "";
@@ -101,4 +146,16 @@ public class Purchase {
         }
         return changeGiven;
     }
+=======
+<<<<<<< HEAD
+
+    //getCurrentBalance(); //purchasePrice, selectedItem,
+    //boolean isThanksgiving; get local date and time
+
+=======
+    //getCurrentBalance(); //purchasePrice, selectedItem,
+    //boolean isThanksgiving; get local date and time
+    int purchasesUntilBOGODO;
+>>>>>>> 5463aeb7ce2a3621f80a9316b0613c9582ad29ec
 }
+>>>>>>> 5f107f2361184ac8d19d531683c9987781327e77
