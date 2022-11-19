@@ -29,10 +29,29 @@ public class PurchaseTest {
         Assert.assertTrue(depositAmount.compareTo(actualBalance)==0 );
 
     }
+    @Test
+    public void notEnoughMoneyAdd(){
+        Purchase purchaseTest = new Purchase();
+        BigDecimal depositAmount = new BigDecimal("1");
+        purchaseTest.addMoney(depositAmount);
+        BigDecimal actualBalance = purchaseTest.getCurrentBalance();
+        Assert.assertTrue(depositAmount.compareTo(actualBalance)==-1 );
+
+    }
 
 
 
 
+
+
+
+
+
+
+
+
+
+}
 
 
 
