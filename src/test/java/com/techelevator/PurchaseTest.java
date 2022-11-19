@@ -7,10 +7,6 @@ import java.time.LocalDate;
 
 //isBOGODOtest, return boolean (check if given date/year is on thanksgiving)
 
-
-
-
-
 public class PurchaseTest extends TestCase {
 @Test
     public void isBOGODO(){
