@@ -67,27 +67,65 @@ public class UserInput {
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
 
-        if (option.equals("M")) {
-            return "insert";
-        } else if (option.equals("S")) {
+        while (!option.equals("M") && !option.equals("S") && !option.equals("F")) {
+            try {
+                if (!option.equals("M") && !option.equals("S") && !option.equals("F")) {
+                    throw new IllegalArgumentException("Please enter M, S, or F as your choice.");
+                }
 
-            return "select";
-        } else if (option.equals("F")) {
-            return "finish";
-        } else {
-            return "";
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            } finally {
+
+                System.out.print("Select an option: ");
+                selectedOption = scanner.nextLine();
+                option = selectedOption.trim().toUpperCase();
+            }
         }
+
+        if (option.equalsIgnoreCase("M")) {
+            return "insert";
+        } else if (option.equalsIgnoreCase("S")) {
+            return "select";
+        } else if (option.equalsIgnoreCase("F")) {
+            return "finish";
+        }
+        return "";
     }
 
     public BigDecimal getMoneyProvided() {
-        //Create a while loop with a try catch statement that catches if the user inputs anything other than 1, 5, 10, or 20.
+
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
         String insert = scanner.nextLine();
+        while (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
+            try {
+                if (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
+                    throw new IllegalArgumentException("Please insert $1, $5, $10, or $20");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.print("Insert acceptable bills: ");
+                insert = scanner.nextLine();
+                insert = insert.trim().toUpperCase();
+            }
+        }
         double n = Double.parseDouble(insert);
         BigDecimal inserted = new BigDecimal(n);
-        return inserted;
-    }
+
+        if (inserted.equals(1)) {
+            return BigDecimal.valueOf(1);
+        } else if (inserted.equals(5)) {
+            return BigDecimal.valueOf(5);
+        } else if (inserted.equals(10)) {
+            return BigDecimal.valueOf(10);
+        } else if (inserted.equals(20)) {
+            return BigDecimal.valueOf(20);
+        }
+         return BigDecimal.ZERO;
+
+        }
 
     public String getSelectedItem() {
         System.out.print("Enter the key of your selected item: ");
