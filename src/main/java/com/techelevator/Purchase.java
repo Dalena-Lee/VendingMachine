@@ -34,17 +34,27 @@ public class Purchase {
         return currentBalance;
     }
 
-    public void addToBalance(BigDecimal deposit) {
-        currentBalance = currentBalance.add(deposit);
+    public String addToBalance(BigDecimal deposit) {
+        BigDecimal newValue = currentBalance.add(deposit);
+        String message = "";
+
+        //Limit the amount inserted to $20.
+        if (newValue.compareTo(BigDecimal.valueOf(20)) == 1){
+            message = "Unable to accept amounts greater than $20.00";
+        }
+        else {
+            currentBalance = currentBalance.add(deposit);
+            message = currentBalance + " was inserted.";
+        }
+        return message;
     }
 
     public void countNumberOfItems(){
         numberOfItems++;
     }
 
-    public BigDecimal calculateChange(BigDecimal purchasePrice) {
-        LocalDate now = LocalDate.now();
-        if (now.getMonth().equals(Month.NOVEMBER)) {
+    public BigDecimal calculateChange(BigDecimal purchasePrice, boolean isNovember) {
+        if (isNovember) {
             if (numberOfItems % 2 == 0) {
                 purchasePrice = purchasePrice.subtract(BigDecimal.ONE);
             }
@@ -52,8 +62,6 @@ public class Purchase {
         currentBalance = currentBalance.subtract(purchasePrice);
         return currentBalance;
     }
-
-
 
     public List<String> receiveChange(){
 

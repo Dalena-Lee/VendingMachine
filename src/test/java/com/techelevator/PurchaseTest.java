@@ -1,13 +1,9 @@
 package com.techelevator;
 
-import junit.framework.TestCase;
-import org.junit.Assert;
 import org.junit.Test;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
-
-//isBOGODOtest, return boolean (check if given date/year is on thanksgiving)
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PurchaseTest {
     @Test
@@ -15,7 +11,7 @@ public class PurchaseTest {
         Purchase purchaseTest = new Purchase();
         BigDecimal expectedBalance = BigDecimal.ZERO;
         BigDecimal actualBalance = purchaseTest.getCurrentBalance();
-        Assert.assertTrue(expectedBalance.compareTo(actualBalance)== 0);
+        assertTrue(expectedBalance.compareTo(actualBalance)== 0);
 
 
     }
@@ -25,22 +21,39 @@ public class PurchaseTest {
         BigDecimal depositAmount = new BigDecimal("30");
         purchaseTest.addToBalance(depositAmount);
         BigDecimal actualBalance = purchaseTest.getCurrentBalance();
-        Assert.assertTrue(depositAmount.compareTo(actualBalance)==0 );
+        assertTrue(depositAmount.compareTo(actualBalance)==0 );
 
     }
     @Test
     public void calculateChange(){
         Purchase purchaseTest = new Purchase();
-        BigDecimal testChange = new BigDecimal("5");
+        BigDecimal testBalance = new BigDecimal("5");
         BigDecimal testPrice = new BigDecimal("2.50");
-        BigDecimal expectedBalance = new BigDecimal("2.50");
+        BigDecimal expectedBalance = testBalance.subtract(testPrice);
+        purchaseTest.addToBalance(testBalance);
+        BigDecimal actualBalance = purchaseTest.calculateChange(testPrice, false);
 
-        purchaseTest.addToBalance(testChange);
-        BigDecimal actualBalance = purchaseTest.calculateChange(testPrice);
+        assertEquals(expectedBalance, actualBalance);
 
-        Assert.assertEquals(expectedBalance, actualBalance);
+        purchaseTest = new Purchase();
+        testBalance = new BigDecimal("5.25");
+        testPrice = new BigDecimal("2.25");
+        expectedBalance = testBalance.subtract(testPrice);
+        purchaseTest.addToBalance(testBalance);
+        actualBalance = purchaseTest.calculateChange(testPrice, false);
 
+        assertEquals(expectedBalance, actualBalance);
+
+        purchaseTest = new Purchase();
+        testBalance = new BigDecimal("5.25");
+        testPrice = new BigDecimal("2.25");
+        expectedBalance = testBalance.subtract(testPrice);
+        purchaseTest.addToBalance(testBalance);
+        actualBalance = purchaseTest.calculateChange(testPrice, false);
+
+        assertEquals(expectedBalance, actualBalance);
     }
+
     @Test
     public void calculateChangeNovember(){
         Purchase purchaseTest = new Purchase();
@@ -49,9 +62,9 @@ public class PurchaseTest {
         BigDecimal expectedBalance = new BigDecimal("2.50");
 
         purchaseTest.addToBalance(testChange);
-        BigDecimal actualBalance = purchaseTest.calculateChange(testPrice);
+        BigDecimal actualBalance = purchaseTest.calculateChange(testPrice, true);
 
-        Assert.assertEquals(expectedBalance, actualBalance);
+        assertEquals(expectedBalance, actualBalance);
 
 
     }

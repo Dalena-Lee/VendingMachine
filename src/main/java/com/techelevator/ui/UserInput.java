@@ -84,6 +84,9 @@ public class UserInput {
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
         String insert = scanner.nextLine();
+
+
+
         double n = Double.parseDouble(insert);
         BigDecimal inserted = new BigDecimal(n);
         return inserted;
