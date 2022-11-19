@@ -28,27 +28,4 @@ public class PurchaseTest {
         Assert.assertTrue(depositAmount.compareTo(actualBalance)==0 );
 
     }
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-
-
-
-}
-
-
-
-
-
-
-=======
->>>>>>> 1dd2e1404f5857eadbc59b51c623bcaf8718f9be
 }
