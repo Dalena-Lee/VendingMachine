@@ -12,20 +12,20 @@ public class UserOutput {
 
     public void displayMessage(String type){
 
-        if(type.equalsIgnoreCase("munchy")) {
-            System.out.println("Munchy, Munchy, so Good!");
+        if(type.equalsIgnoreCase("Spongebob")) {
+            System.out.println("I'm ready, I'm ready, I'm ready \uD83E\uDD29!");
         }
 
-        else if (type.equalsIgnoreCase("candy")) {
-            System.out.println("Sugar, Sugar, so Sweet!");
+        else if (type.equalsIgnoreCase("MonsterHighDolls")) {
+            System.out.println("Being the only normie at Monster High is creepy cool!! \uD83D\uDE0E");
         }
 
-        else if (type.equalsIgnoreCase("drink")) {
-            System.out.println("Drinky, Drinky, Slurp Slurp!");
+        else if (type.equalsIgnoreCase("Andy'sToys")) {
+            System.out.println("Please just keep me until you leave for college!! \uD83E\uDD72 !!");
         }
 
-        else if (type.equalsIgnoreCase("gum")) {
-            System.out.println("Chewy, Chewy, Lots O Bubbles!");
+        else if (type.equalsIgnoreCase("TeddyBear")) {
+            System.out.println("Don't leave me or I'll turn into Lotso \uD83D\uDC98 !!!");
         }
     }
 
