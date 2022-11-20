@@ -67,9 +67,9 @@ public class VendingMachine {
                         //Iterate through the list of Item objects and select the item using input key.
                         for (Item i : itemManager.getItems()) {
                             String key = i.getItemKey();
-                            if (key.equals(selectedItem)) {
+                            if (key.equalsIgnoreCase(selectedItem)) {
                                 if (itemManager.isInStock(i)) {
-                                    //Count item for isBogodo and calculateChange method
+                                    //Keep track of purchased items for discount
                                     purchase.increaseNumberOfItems();
 
                                     // record to audit and calculate change
@@ -80,7 +80,7 @@ public class VendingMachine {
                                     audit.recordToAudit(currentTime, itemAudit, key, currentBalance, balanceAfterPurchase);
 
                                     //update stock
-                                    i.decreaseStock();
+                                    itemManager.decreaseStock(key);
 
                                     //display message and dispense item
                                     System.out.println();
@@ -89,7 +89,7 @@ public class VendingMachine {
                                 }
 
                                 else {
-                                    System.out.println("Sorry, item is out of stock!");
+                                    userOutput.outOfStock();
                                 }
                             }
                         }

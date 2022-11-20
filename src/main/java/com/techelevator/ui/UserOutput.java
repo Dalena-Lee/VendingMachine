@@ -29,6 +29,10 @@ public class UserOutput {
         }
     }
 
+    public void outOfStock(){
+        System.out.println("Sorry, item is out of stock!");
+    }
+
     public void displayHomeScreen(){
         System.out.println();
         System.out.println("***************************************************");

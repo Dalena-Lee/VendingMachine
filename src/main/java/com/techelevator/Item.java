@@ -12,7 +12,6 @@ public class Item {
     public Item(String itemkey, String itemName, String purchasePrice, String type) {
         this.itemKey = itemkey;
         this.itemName = itemName;
-        //Might need to convert purchaseprice into bigdecimal using valueof.
         this.purchasePrice = new BigDecimal(purchasePrice);
         this.type = type;
     }
@@ -21,39 +20,26 @@ public class Item {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getItemKey() {
         return itemKey;
     }
 
-    public void setItemKey(String itemKey) {
-        this.itemKey = itemKey;
-    }
 
     public int getStockCount() {
         return stockCount;
     }
 
-    public void decreaseStock() {
-        stockCount--;
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
     }
 
     public BigDecimal getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(BigDecimal purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
 }
