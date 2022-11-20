@@ -30,7 +30,7 @@ public class VendingMachine {
 
             if(choice.equals("display")) {
                 // display the vending machine slots
-                for (String s: stock.getDisplayItem()){
+                for (String s: stock.getDisplayOfItems()){
                     System.out.println(s);
                 }
             }

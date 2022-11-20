@@ -47,35 +47,11 @@ public class Stock {
         }
     }
 
-    public File getStockFile() {
-        return stockFile;
-    }
-
-    public void setStockFile(File stockFile) {
-        this.stockFile = stockFile;
-    }
-
-    public List<String> getDisplayItem() {
+    public List<String> getDisplayOfItems() {
         return displayItem;
-    }
-
-    public void setDisplayItem(List<String> displayItem) {
-        this.displayItem = displayItem;
-    }
-
-    public List<Item> getVendingItems() {
-        return vendingItems;
-    }
-
-    public void setVendingItems(List<Item> vendingItems) {
-        this.vendingItems = vendingItems;
     }
 
     public ItemManager getItemManager() {
         return itemManager;
-    }
-
-    public void setItemManager(ItemManager itemManager) {
-        this.itemManager = itemManager;
     }
 }
