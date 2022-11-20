@@ -98,10 +98,7 @@ public class UserInput {
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
         String insert = scanner.nextLine();
-<<<<<<< HEAD
 
-=======
->>>>>>> e369b0505b919c658bb9440bd2f82bc96ac55278
         while (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
             try {
                 if (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
