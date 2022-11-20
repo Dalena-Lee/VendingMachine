@@ -71,7 +71,4 @@ public class Audit {
         return date;
     }
 
-    public void setCurrentTime(LocalDateTime currentTime) {
-        this.currentTime = currentTime;
-    }
 }

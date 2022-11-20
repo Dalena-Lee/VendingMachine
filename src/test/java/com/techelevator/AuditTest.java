@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,28 +69,32 @@ public class AuditTest {
         audit.printToFile(auditFile);
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        String testTime = "11/19/2022 08:16:53 PM";
-        String testMessage = "Money inserted: ";
-        String testFormatedMoney = formatter.format(10);
-        String testItemKey = "A1";
-        String testFormatedMoneyAfterPurchase = formatter.format(5.25);
-
-        String expectedString1 = String.format("%-22s %-18s %-7s %-7s", testTime, testMessage, testFormatedMoney, testFormatedMoney);
-        String expectedString2 = String.format("%-22s %-15s %-2s %-7s %-7s", testTime, testMessage, testItemKey, testFormatedMoney, testFormatedMoneyAfterPurchase);
-
+        String a = "Test string 1.";
+        String b = "Test string 2.";
 
         try (PrintWriter fileWriter = new PrintWriter(auditFile)) {
-            fileWriter.println(expectedString1);
-            fileWriter.println(expectedString2);
+            fileWriter.println(a);
+            fileWriter.println(b);
         }
 
         if(auditFile.exists()) {
             auditContent = Files.readString(auditFile.toPath());
         }
 
-        String[] result = {expectedString1, expectedString2};
+        String[] result = {a, b};
         String auditFileExpect = String.join(System.lineSeparator(), result);
 
-        Assert.assertEquals(auditFileExpect, auditContent.trim());
+        assertEquals(auditFileExpect, auditContent.trim());
+    }
+
+    @Test
+    public void getCurrentTime() {
+        Audit audit = new Audit();
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
+        String expectedDateTime = currentTime.format(formatter);
+        String actualDateTime = audit.getCurrentTime();
+
+        assertEquals("Expected: " + expectedDateTime + "\n" + "Actual: " + actualDateTime,expectedDateTime, actualDateTime);
     }
 }
