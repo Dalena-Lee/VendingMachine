@@ -5,6 +5,7 @@ import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.Month;
 
 public class VendingMachine {
@@ -43,7 +44,7 @@ public class VendingMachine {
                     if (purchaseChoice.equals("insert")) {
                         BigDecimal inserted = userInput.getMoneyProvided();
                         //set current balance to the money provided
-                        purchase.addToBalance(inserted);
+                        System.out.println(purchase.addToBalance(inserted));
 
                         //Record to audit.txt
                         BigDecimal currentBalance = purchase.getCurrentBalance();
@@ -53,6 +54,13 @@ public class VendingMachine {
                     }
 
                     else if (purchaseChoice.equals("select")) {
+                        //If user has not inserted any money:
+                        while (purchase.getCurrentBalance().equals(BigDecimal.valueOf(0))) {
+                            System.out.println("Please insert money first.");
+                            System.out.println();
+                            userInput.getMoneyProvided();
+                        }
+
                         //Prompt user to select an item using the item key.
                         String selectedItem = userInput.getSelectedItem();
 
@@ -62,7 +70,7 @@ public class VendingMachine {
                             if (key.equals(selectedItem)) {
                                 if (itemManager.isInStock(i)) {
                                     //Count item for isBogodo and calculateChange method
-                                    purchase.countNumberOfItems();
+                                    purchase.increaseNumberOfItems();
 
                                     // record to audit and calculate change
                                     String currentTime = audit.getCurrentTime();
@@ -88,6 +96,11 @@ public class VendingMachine {
                     }
 
                     else if (purchaseChoice.equals("finish")) {
+                        //If user did nothing:
+                        while (purchase.getCurrentBalance().equals(BigDecimal.valueOf(0))) {
+                            break Innerloop;
+                        }
+
                         BigDecimal balanceBeforeChange = purchase.getCurrentBalance();
                         userOutput.displayChange(purchase.receiveChange());
 
@@ -100,8 +113,10 @@ public class VendingMachine {
                         break Innerloop;
                     }
 
+                    NumberFormat formatter = NumberFormat.getCurrencyInstance();
+                    String formatedBalance = formatter.format(purchase.getCurrentBalance());
                     System.out.println();
-                    System.out.println("Remaining Balance: $" + purchase.getCurrentBalance());
+                    System.out.println("Remaining Balance: " + formatedBalance);
                     System.out.println();
 
                 }

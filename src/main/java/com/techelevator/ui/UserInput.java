@@ -43,11 +43,11 @@ public class UserInput {
             }
         }
 
-        if (option.equalsIgnoreCase("D")) {
+        if (option.equals("D")) {
             return "display";
-        } else if (option.equalsIgnoreCase("P")) {
+        } else if (option.equals("P")) {
             return "purchase";
-        } else if (option.equalsIgnoreCase("E")) {
+        } else if (option.equals("E")) {
             return "exit";
         }
         return "";
@@ -83,11 +83,11 @@ public class UserInput {
             }
         }
 
-        if (option.equalsIgnoreCase("M")) {
+        if (option.equals("M")) {
             return "insert";
-        } else if (option.equalsIgnoreCase("S")) {
+        } else if (option.equals("S")) {
             return "select";
-        } else if (option.equalsIgnoreCase("F")) {
+        } else if (option.equals("F")) {
             return "finish";
         }
         return "";
@@ -98,7 +98,6 @@ public class UserInput {
         System.out.println("Please insert $1, $5, $10, or $20.");
         System.out.print("Insert: $");
         String insert = scanner.nextLine();
-<<<<<<< HEAD
         while (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
             try {
                 if (!insert.equals("1") && !insert.equals("5") && !insert.equals("10") && !insert.equals("20")) {
@@ -109,29 +108,13 @@ public class UserInput {
             } finally {
                 System.out.print("Insert acceptable bills: ");
                 insert = scanner.nextLine();
-                insert = insert.trim().toUpperCase();
             }
         }
-=======
 
-
-
->>>>>>> a75ee199935c6ea6e03d5354bf10268a0da5765e
         double n = Double.parseDouble(insert);
         BigDecimal inserted = new BigDecimal(n);
-
-        if (inserted.equals(1)) {
-            return BigDecimal.valueOf(1);
-        } else if (inserted.equals(5)) {
-            return BigDecimal.valueOf(5);
-        } else if (inserted.equals(10)) {
-            return BigDecimal.valueOf(10);
-        } else if (inserted.equals(20)) {
-            return BigDecimal.valueOf(20);
-        }
-         return BigDecimal.ZERO;
-
-        }
+        return inserted;
+    }
 
     public String getSelectedItem() {
         System.out.print("Enter the key of your selected item: ");
