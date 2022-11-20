@@ -7,7 +7,6 @@ public class ItemManager {
     private Item item;
     private List<Item> items = new ArrayList<>();
 
-    //
     public ItemManager(List<Item> items) {
         this.items = items;
     }
@@ -23,16 +22,13 @@ public class ItemManager {
         }
     }
 
-    public void addItem(Item item){
-        items.add(item);
-    }
-
     public void decreaseStock(String itemKey){
-        for (Item eachItem: items)
-            //getting itemkey from user, compare to itemlist we have, then decrease stock
-            if (itemKey.equals(eachItem.getItemKey())){
-                eachItem.decreaseStock();
+        for (Item selectedItem: items) {
+            if (itemKey.equalsIgnoreCase(selectedItem.getItemKey())) {
+                int currentStock = selectedItem.getStockCount();
+                selectedItem.setStockCount(currentStock - 1);
             }
+        }
     }
 
     public List<Item> getItems() {

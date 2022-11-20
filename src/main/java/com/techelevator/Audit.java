@@ -18,6 +18,10 @@ public class Audit {
     public Audit() {
     }
 
+    public List<String> getAuditStrings() {
+        return auditStrings;
+    }
+
     //This audit method records the action taken instead of the item that's purchase.
     public void recordToAudit(String currentTime, String message, BigDecimal inserted, BigDecimal currentBalance){
         String format = formatAuditString(currentTime, message, inserted, currentBalance);
@@ -67,7 +71,4 @@ public class Audit {
         return date;
     }
 
-    public void setCurrentTime(LocalDateTime currentTime) {
-        this.currentTime = currentTime;
-    }
 }
