@@ -2,7 +2,7 @@ package com.techelevator;
 
 import junit.framework.TestCase;
 
-public class StockTest extends TestCase {
+public class StockTest {
 
     public void testStockItems() {
     }
