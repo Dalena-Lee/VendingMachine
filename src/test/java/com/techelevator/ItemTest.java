@@ -1,12 +1,7 @@
 package com.techelevator;
 
-<<<<<<< HEAD
-import junit.framework.TestCase;
-import org.junit.Assert;
-=======
 import org.junit.Assert;
 import org.junit.BeforeClass;
->>>>>>> 4ed9122f5d1bec69170eb844b7c54149c8f31bdd
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
@@ -40,32 +35,6 @@ public class ItemTest {
         } catch (NoSuchMethodException e) {
             fail(e.getMessage());
         }
-    }
-
-    @Test
-<<<<<<< HEAD
-    public void existingNameTest(){
-        //create object of class you want to test
-        Item getItemNameTest = new Item();
-        String itemName = "ValentineHugs";
-
-        String result = getItemNameTest.getItemName();
-        Assert.assertEquals("ValentineHugs", result);
-=======
-    public void getItemName(){
-        Item item = new Item("TEST", "NAME","1.25", "Type");
-        String actual = item.getItemName();
-        String expected = "NAME";
-
-        Assert.assertEquals(expected,actual);
->>>>>>> 4ed9122f5d1bec69170eb844b7c54149c8f31bdd
-    }
-    @Test
-    public void nonExistentNameTest(){
-        Item getItemNameTest = new Item();
-        String itemName = "Squeakers";
-        String result = getItemNameTest.getItemName();
-        Assert.assertEquals("", result);
     }
 
 
