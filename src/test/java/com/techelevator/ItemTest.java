@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ItemTest {
@@ -10,9 +11,22 @@ public class ItemTest {
     }
 
     @Test
-    public void getItemName(){
+    public void existingNameTest(){
+        //create object of class you want to test
+        Item getItemNameTest = new Item();
+        String itemName = "ValentineHugs";
 
+        String result = getItemNameTest.getItemName();
+        Assert.assertEquals("ValentineHugs", result);
     }
+    @Test
+    public void nonExistentNameTest(){
+        Item getItemNameTest = new Item();
+        String itemName = "Squeakers";
+        String result = getItemNameTest.getItemName();
+        Assert.assertEquals("", result);
+    }
+
 
     @Test
     public void getType(){
